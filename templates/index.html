@@ -1,0 +1,49 @@
+{% extends 'layout.html' %} {% block body %}
+
+<section class="text-center row " id="landing">
+    <div class="col-md-12 col-sm-12">
+        <h1 id='main_heading'>Weather</h1>
+        <p class="lead">Accurate Weather in a snap</p>
+    </div>
+
+    <div class="col-md-12 col-sm-12">
+        <div class="form-group">
+            <form action="/index/" method="POST" autocomplete="off">
+                <label for="location" style="font-size:25px;">City</label>
+                <div class="container">
+                    <input autocomplete="off" class="form-control" type="text" placeholder="Enter Your City" name="location">
+                </div>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your location with anyone else.</small>
+                <br>
+                <button type="submit" class="btn btn-outline-dark">Submit</button>
+
+                <a href="/location/" class="btn btn-outline-dark">Your Current Location</a>
+            </form>
+        </div>
+    </div>
+
+    {% if error %}
+    <div class="container">
+    <h2 id="error" >{{ error }}</h2>
+    </div>
+    {% elif weather %}
+    <div class="container">
+        <div id="weather">
+            <div class="row">
+                <h1 class="col-md-6 col-sm-6 col-xs-6">{{ weather['city_name'] }}</h1>
+                <h1 class="col-md-6 col-sm-6 col-xs-6">{{ weather['datetime'] }}</h1>
+                <br>
+                <h2 class="col-md-6 col-sm-6 col-xs-6 col-2">{{ weather['weather']['description'] }}</h2>
+                <h2 class="col-md-6 col-sm-6 col-xs-6 col-2">{{ weather['temp'] }} &#8451; </h2>
+                <br>
+                <h1 class="col-md-6 col-sm-6 col-xs-6 col-3">Wind Speed</h1>
+                <h1 class="col-md-6 col-sm-6 col-xs-6 col-3">{{ weather['wind_spd'] }}m/s <small>{{ weather['wind_cdir_full'] }}</small></h1>
+                
+        </div>
+
+    </div>
+    {% endif %}
+
+</section>
+
+{% endblock %}
